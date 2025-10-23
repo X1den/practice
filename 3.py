@@ -72,7 +72,7 @@ print("C_i:", Cs)
 I_approx = interpolatory_quadrature(a, b, p, f, nodes, Cs)
 print("Приближение интеграла I ≈", I_approx)
 
-M_est = 10.0
+M_est = 4.1
 bound, integral_absw = error_bound_theoretical(a, b, p, nodes, M_est)
 print("∫ p(x)|w(x)| dx =", integral_absw)
 print("Теоретическая верхняя граница остатка |R| <=", bound)
