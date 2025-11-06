@@ -1,26 +1,28 @@
 import math
-from decimal import Decimal, getcontext
-getcontext().prec = 30
 
-a, b = Decimal('1.5'), Decimal('3.75')
-E0 = Decimal('1e-8')
+a, b = -1.2, 1.2
+E0 = 1e-3
 
 def f(x):
-    # x - Decimal
-    x_float = float(x)                # для возведения в степень и экспоненты
-    return Decimal(x_float**3) * Decimal(math.exp(-0.12 * x_float**1.5))
+    denominator = math.cbrt(((x + 1.2)**2) * ((x - 12)**2))
+    if abs(denominator) < 1e-15:
+        return math.sin(x + 1.2) / 1e-15
+    return math.sin(x + 1.2) / denominator
 
 def simpson(f, a, b, n):
-    if n <= 0: return Decimal(0)
+    if n <= 0: return 0.0
     if n % 2 != 0: n += 1
 
-    result = Decimal(0)
-    h = (b - a) / Decimal(n)
+    result = 0.0
+    h = (b - a) / n
     for i in range(n):
         x1 = a + i * h
         x2 = a + (i + 1) * h
-        mid = (x1 + x2) / Decimal(2)
-        result += (x2 - x1) / Decimal(6) * (f(x1) + 4*f(mid) + f(x2))
+        mid = (x1 + x2) / 2.0
+        try:
+            result += (x2 - x1) / 6.0 * (f(x1) + 4*f(mid) + f(x2))
+        except ZeroDivisionError:
+            continue
     return result
 
 def find_n_by_runge(f, a, b, n0=2):
@@ -29,19 +31,26 @@ def find_n_by_runge(f, a, b, n0=2):
     n = n + 1 if n % 2 == 1 else n
 
     while n <= 2048:
-        I_n = simpson(f, a, b, n)
-        I_2n = simpson(f, a, b, 2 * n)
-        err_est = abs(I_2n - I_n) / (Decimal(2)**p - 1)
+        try:
+            I_n = simpson(f, a, b, n)
+            I_2n = simpson(f, a, b, 2 * n)
+            err_est = abs(I_2n - I_n) / (2**p - 1)
 
-        if err_est <= E0:
-            return 2 * n, float(I_2n), float(err_est), float(I_n), float(I_2n)
+            if err_est <= E0:
+                return 2 * n, I_2n, err_est, I_n, I_2n
+        except (ZeroDivisionError, ValueError) as e:
+            print(f"Ошибка при n={n}: {e}")
+            break
 
         n *= 2
-    return n, float(I_2n), float(err_est), float(I_n), float(I_2n)
+    return n, I_2n, err_est, I_n, I_2n
 
-n_used, I_approx, err_est, I_n, I_2n = find_n_by_runge(f, a, b, n0=2)
-residual = abs(I_2n - I_n)
-print(f"Использовано отрезков n = {n_used}")
-print(f"I ≈ {I_approx:.9f}")
-print(f"Оценка ошибки по Рунге: {err_est:.9e}")
-print(f"Невязка: {residual:.9e}")
+try:
+    n_used, I_approx, err_est, I_n, I_2n = find_n_by_runge(f, a, b, n0=2)
+    residual = abs(I_2n - I_n)
+    print(f"Использовано отрезков n = {n_used}")
+    print(f"I ≈ {I_approx:.9f}")
+    print(f"Оценка ошибки по Рунге: {err_est:.9e}")
+    print(f"Невязка: {residual:.9e}")
+except Exception as e:
+    print(f"Ошибка: {e}")
