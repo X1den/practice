@@ -15,7 +15,6 @@ def cubic_spline_M(x_nodes, y_nodes):
         A[i][i+1] = h[i]
         B[i] = 6*((y_nodes[i+1]-y_nodes[i])/h[i] - (y_nodes[i]-y_nodes[i-1])/h[i-1])
     
-    # Решение методом Гаусса
     for i in range(n+1):
         factor = A[i][i]
         for j in range(i, n+1):
@@ -44,7 +43,7 @@ def spline_integral(f, a, b, n):
     h = [x_nodes[i+1]-x_nodes[i] for i in range(n-1)]
     integral = 0
     for i in range(n-1):
-        integral += 0.5*h[i]*(y_nodes[i]+y_nodes[i+1]) - (h[i]**3/24)*(M[i]+M[i+1])
+        integral += (1/2)*h[i]*(y_nodes[i]+y_nodes[i+1]) - (1/24)*(h[i]**3)*(M[i]+M[i+1])
     return integral, x_nodes, y_nodes, M
 
 def spline_error(f, a, b, n):

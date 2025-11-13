@@ -58,11 +58,11 @@ def error_bound_theoretical(a, b, p_func, nodes, M_np1, n_integral=1000):
     bound = M_np1 * integral_absw / math.factorial(N + 1)
     return bound, integral_absw
 
-a = -1.2
-b = 1.2
+a = 1.5
+b = 3.75
 
 p = lambda x: 1.0
-f = lambda x: (math.sin(x + 1.2)) / (math.cbrt(((x + 1.2)**2) * ((x - 12)**2)))
+f = lambda x: x**3 * math.exp(-0.12 * x**1.5)
 
 nodes = [1.5, 2.25, 3.0, 3.75]
 
