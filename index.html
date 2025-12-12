@@ -1,0 +1,823 @@
+
+<!doctype html>
+<html>
+	<head>
+		<!-- meta -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<!-- title -->
+		<title>Последовательности</title>
+
+		<!-- load style -->
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/my.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			let link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<style>
+			.left {
+				float: left;
+				margin-left: 60px;
+			}
+			.right {
+				float: right;
+				margin-right: 60px;
+			}
+			.clear {
+				clear: both;
+			}
+			.reveal table.tic-toe {
+				border-collapse: separate !important;
+			}
+			td {
+				width: 40px;
+				height: 40px;
+				text-align: center !important;
+			}
+			td:nth-child(2) {
+				border-left: 1px solid white;
+				border-right: 1px solid white;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						Последовательности
+						==================
+						$$ \{X_n\}^{\infty}_{n=1} $$
+						
+						Note:
+						Титульный слайд
+					</script>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						Числовая последовательность
+						-----------
+						
+						Note:
+						Определения
+					</script>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						### Числовая последовательность
+						
+						Пусть задано некоторое множество $X$ произвольных 
+						элементов, тогда любое отображение $F:\mathbb{N} 
+						\rightarrow X $ называется  
+						числовой последовательностью.  
+						$X_n = f(n)$ называется $n$-м элементом,  
+						а порядковый номер - индексом.
+						[//]: коментарий
+						
+						Note:
+						Пусть задано некоторое множество икс произвольных элементов, тогда 
+						любое отображение из множества натуральных чисел в множество икс называется числовой последовательность.
+					</script>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						### Примеры
+						$$
+							\{ n^2 \} = \{1, 4, 9, \ldots, 81, 100, \ldots\}
+						$$
+						$$
+							\left\{ \dfrac{1}{n} \right\} = \left\{1, \dfrac{1}{2}, \dfrac{1}{3}, 
+										\ldots, \dfrac{1}{10}, \dfrac{1}{11}, \ldots\right\} 
+						$$
+
+						[//]: коментарий
+						
+						Note:
+						Примеры последовательностей
+					</script>
+				</section>
+				
+				<section data-background-iframe="https://www.youtube.com/embed/sQvrx6UFmf0"
+				data-background-interactive data-menu-title="Лекция на Youtube">
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						Арифметическая прогрессия
+						-----------
+						
+						Note:
+						Определения
+					</script>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						### Арифметическая прогрессия
+						Арифметическая прогрессия - это числовая последовательность
+						вида $a_{n+1} = a_n + d $,  
+						где $a_n$ - $n$-ый член последовательности,  
+						а $d$ - разность.
+
+						Note:
+						Арифметическая прогрессия - это числовая последовательность,
+						где последующий равен предыдущему плюс разность.
+					</script>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						### Примеры
+						$$
+							a_n = \{7n+1\} = \{ 8, 15, 22, 29, 36, 43, 50 , \ldots \}
+						$$
+						
+						Note:
+						Примеры
+					</script>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						### Сумма членов арифметической прогрессии
+						
+						$$
+							S_n = \sum_{i=1}^n a_i = \dfrac{a_1+a_n}{2} n 
+							 = \dfrac{2a_1+d(n-1)}{2}
+						$$
+
+						Note:
+						Два способа подсчета суммы арифметической прогрессии
+					</script>
+				</section>
+
+				<section data-background-iframe="https://www.youtube.com/embed/0m2xKgHorBM"
+				data-background-interactive data-menu-title="Лекция на Youtube">
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						Программа
+						---------
+						
+						Прогрессия: $\{ 6n-5 \} = \{1, 7, 13, 19, \ldots\}$  
+						S<input type="number" id="arithProgress"> = <output id="arithProgressOut"></output>
+
+						Note:
+						Определения
+					</script>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						Программа
+						---------
+						```
+						let arithProgressFunc = n => (1 + (6*n-5))*(n/2);
+						arithProgress.onkeyup = val => {
+							arithProgressOut.innerHTML = 
+								arithProgressFunc(val.target.value);
+						};
+
+						```
+					</script>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						Геометрическая прогрессия
+						-----------
+						
+						Note:
+						Определения
+					</script>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						### Геометрическая прогрессия
+						Геометрическая прогрессия - это числовая последовательность
+						вида $b_{n+1} = b_nq $,  
+						где $b_n$ - $n$-ый член последовательности,  
+						а $q$ - знаменатель.
+
+						Note:
+						Геометрическая прогрессия - это числовая последовательность,
+						где последующий равен предыдущему помноженный на знаменатель
+					</script>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						### Примеры
+						$$
+							b_n = \{2n\} = \{2, 4, 8, 16, 32, 64 , \ldots \}
+						$$
+						
+						Note:
+						Примеры
+					</script>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						### Сумма членов геометрической прогрессии
+						
+						$$ 
+							S_n = \sum_{i=1}^n b_i =
+							\begin{cases}
+								\dfrac{b_1-b_1q^n}{1-q} &, \text{если } q \ne 1 \\
+								nb_1 &, \text{если } q = 1
+							\end {cases}
+						$$
+
+						Note:
+						Сумма геометрической прогрессии
+					</script>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						### Произведение членов геометрической прогрессии
+						
+						$$ 
+							P_n = (b_1 \cdot b_n) ^ {\frac{n}{2}}
+						$$
+
+						Note:
+						Произведение геометрической прогрессии
+					</script>
+				</section>
+
+				<section data-background-iframe="https://www.youtube.com/embed/b3ZHgQSNGmA"
+				data-background-interactive data-menu-title="Лекция на Youtube">
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						Программа
+						---------
+						
+						Прогрессия: $\{2, 6, 18, 54, \ldots\}$  
+						S<input type="number" id="geomProgressSum"> =  <output id="geomProgressSumOut"></output>  
+						P<input type="number" id="geomProgressMult"> =  <output id="geomProgressMultOut"></output>
+
+						Note:
+						Определения
+					</script>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						Программа
+						---------
+						```
+						let geomProgressSumFunc = n => -(2* (1-3**n))/2;
+						geomProgressSum.onkeyup = val => {
+							geomProgressSumOut.innerHTML = 
+							  geomProgressSumFunc(val.target.value);
+						}
+						```
+					</script>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						Программа
+						---------
+						```
+						let geomProgressMultFunc = n => (4*3**(n-1))**(n/2);
+						geomProgressMult.onkeyup = val => {
+							geomProgressMultOut.innerHTML = 
+							  geomProgressMultFunc(val.target.value);
+						}
+						```
+					</script>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						Числа Фибоначчи
+						-----------
+						
+						Note:
+						Определения
+					</script>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						### Числа Фибоначчи
+						Числа Фибоначчи - числовая последовательность, где 
+						первые 2 члена равны 1, а все последующие сумме 2 предыдущих.
+
+						Note:
+						Числа Фибоначчи - числовая последовательность, где 
+						первые 2 члена равны 1, а все последующие сумме 2 предыдущих.
+					</script>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						### Числа Фибоначчи
+						$$
+							\{1, 1, 2, 3, 5, 8, 13, 21, 34, 55 , \ldots\}
+						$$
+						
+						Note:
+						Числа Фибоначчи
+					</script>
+				</section>
+
+				<section data-background-iframe="https://www.youtube.com/embed/kayX8XTjL9E"
+				data-background-interactive data-menu-title="Лекция на Youtube">
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						Программа
+						---------
+						
+						F<input type="number" id="fibonacci"> =  <output id="fibonacciOut"></output>
+
+						Note:
+						Определения
+					</script>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						Программа
+						---------
+						```
+						let fibonacciFunc = n => {
+							let f = [1,1];
+							if (n > 1) {
+								for (let i = 2; i < n; i++) {
+									f[i] = f[i-1] + f[i-2];
+								}
+							}
+							if (n == 1) return 1;
+							return f.join(', ');
+						}
+						fibonacci.onkeyup = val => {
+							fibonacciOut.innerHTML = fibonacciFunc(val.target.value);
+						}
+						```
+					</script>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						Сверхвозрастающая последовательность
+						-----------
+						
+						Note:
+						Определения
+					</script>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						### Сверхвозрастающая последовательность
+						Последовательность натуральных чисел $s_1, s_2, \ldots$ -
+						сверхвозрастающая, если выполнено условие
+						$$\forall n > 1: S_{n+1} > \sum_{j=1}^nS_j$$
+
+						Note:
+						Последовательность натуральных чисел называется сверхвозрастающей,
+						если каждый последующий член больше сумме всех предыдущих.
+					</script>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						### Примеры
+						$$
+							\{2^n\} = \{1, 2, 4, 8, 16, 32, \ldots\}
+						$$
+						$$
+							\{2, 4, 11, 20\}
+						$$
+						
+						Note:
+						Примеры
+					</script>
+				</section>
+
+				<section data-background-iframe="https://www.youtube.com/embed/c4OuLLwn-I0"
+				data-background-interactive data-menu-title="Лекция на Youtube">
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						### Крестики-нолики
+						
+						<div class="left">
+							<table class="tic-toe">
+								<tr>
+									<td data-score="1"></td>
+									<td data-score="2"></td>
+									<td data-score="4"></td>
+								</tr>
+								<tr>
+									<td data-score="8"></td>
+									<td data-score="16"></td>
+									<td data-score="32"></td>
+								</tr>
+								<tr>
+									<td data-score="64"></td>
+									<td data-score="128"></td>
+									<td data-score="256"></td>
+								</tr>
+							</table>
+						</div>
+						<div class="right">
+							<input id ="startGame" type="button" value="Начать игру"> <!-- .element: style="font-size:20pt;"-->  
+							<output id="winOut"></output>
+						</div>
+						<div class="clear"></div>						
+						Note:
+						Крестики-нолики
+					</script>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						### Ранцевый алгоритм шифрования
+						
+						<textarea cols="100" rows="5" id="encode"></textarea>  
+						q=<output id="q"></output>, r=<output id="r"></output>  
+						w=<output id="w"></output> <!-- .element: style="font-size:20pt;"-->  
+						Текст = <output id="resultEncode"></output>
+
+						Note:
+						Ранцевый алгоритм шифрования
+					</script>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						### Ранцевый алгоритм шифрования
+						
+						<label for="q1">q=</label> <input type="text" id="q1" value="">, <label for="r1">r=</label> <input type="text" id="r1" value="">  
+						<label for="w1">w=</label> <input type="text" id="w1" value="" style="width:400px">  
+						<label for="decode">Зашифрованная строка:</label>  <textarea cols="100" rows="5" id="decode"></textarea>  
+						Текст = <output id="resultDecode"></output>
+
+						Note:
+						Ранцевый алгоритм шифрования
+					</script>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						Приложение
+						----------
+
+					</script>
+				</section>
+
+				<section data-background-image="image/1.jpg" data-menu-title="Книга">
+				</section>
+
+				<section data-background-image="image/2.jpg" data-menu-title="Калькулятор">
+				</section>
+
+				<section data-background-image="image/3.jpg" data-menu-title="Пи">
+				</section>
+
+				<section data-background-image="image/4.jpg" data-menu-title="Math">
+				</section>
+
+				<section data-background-image="image/5.jpg" data-menu-title="Карандаши">
+				</section>
+
+				<section data-background-image="image/6.jpg" data-menu-title="Линейки">
+				</section>
+
+				<section data-background-image="image/7.jpg" data-menu-title="Доска">
+				</section>
+
+				<section data-background-image="image/8.jpg" data-menu-title="Лиса">
+				</section>
+
+				<section data-background-image="image/9.jpg" data-menu-title="Числа">
+				</section>
+
+				<section data-background-image="image/10.jpg" data-menu-title="Тригонометрический круг">
+				</section>
+
+				<section data-background-image="image/11.jpg" data-menu-title="Крестики-нолики">
+				</section>
+
+				<section data-background-image="image/12.jpg" data-menu-title="Знаки">
+				</section>
+
+				<section data-background-image="image/13.jpg" data-menu-title="Числа">
+				</section>
+
+				<section data-background-image="image/14.jpg" data-menu-title="Я люблю математику">
+				</section>
+
+				<section data-background-image="image/15.jpg" data-menu-title="Числа Фибоначчи">
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<script type="text/template">
+						Спасибо за внимание
+						-------------------
+					</script>
+				</section>
+
+			</div>
+		</div>
+
+		<!-- load js -->
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script src="js/ranec.js"></script>
+		<script src="js/lib.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				
+				// save slide
+				history: true,
+				slideNumber: true,
+				touch: true,
+
+				// show katex error
+				math: {
+					notificationsEnabled: true,
+				},
+
+				menu: {
+					side: 'left', //Расположение меню
+					numbers: true, //Нумерация слайдов
+					markers: true, //Маркер посещения
+					titleSelector: 'h1, h2, h3, h4, h5, h6', //Заголовки, отображаемые в меню
+					useTextContentForMissingTitles: true, //Если заголовка нет, то подставляем первые слова слайда
+					hideMissingTitles: false, //Если заголовка нет, то скрываем слайд из меню
+					transitions: true, //Установить меню анимации
+					openButton: true, //Скрыть кнопку меню
+					keyboard: true, //Открытие меню по кнопке m
+				},
+
+				// load dependencies
+				dependencies: [
+					{
+						// tex
+						src: 'plugin/math-katex/math-katex.js', 
+						async: true,
+						callback: () => {
+							// solve problem with katex 
+							let section = document.querySelectorAll('section script');
+								section.forEach( (item, i) => {
+									section[i].innerHTML = section[i].innerHTML
+										.replace(/\\/g,'\\\\')
+										.replace(/_/g,'\\_')
+										.replace(/\{/g,'\\\{')
+										.replace(/\}/g,'\\\}');
+							});
+						},
+					}, { 
+						//markdown
+						src: 'plugin/markdown/marked.js',
+					}, { 
+						src: 'plugin/markdown/markdown.js', 
+						async: true,
+					},{ 
+						//Menu
+						src: 'plugin/menu/menu.js',
+						async: true
+					},{ 
+						//notes
+						src: 'plugin/notes/notes.js', 
+						async: true
+					}, { 
+						// highlight syntax
+						src: 'plugin/highlight/highlight.js', 
+						async: true, 
+						callback: () => {
+							let code = document.querySelectorAll('code');
+							code.forEach ( (item, i) => {
+								code[i].innerHTML = code[i].innerHTML
+									.replace(/\\{/g,'{')
+									.replace(/\\}/g,'}');
+							});
+							hljs.initHighlightingOnLoad();
+						}
+					}
+				]
+			});
+
+			// Функция суммы арифметической прогрессии
+			let arithProgressFunc = n => (1 + (6*n-5))*(n/2);
+
+			// Функция суммы геометрической прогрессии
+			let geomProgressSumFunc = n => -(2* (1-3**n))/2;
+
+			// Функция произведения геометрической прогрессии
+			let geomProgressMultFunc = n => (4*3**(n-1))**(n/2);
+
+			//Функция Фибоначчи
+			let fibonacciFunc = n => {
+				let f = [1,1];
+				if (n > 1) {
+					for (let i = 2; i < n; i++) {
+						f[i] = f[i-1] + f[i-2];
+					}
+				}
+				if (n < 2) return 1;
+				return f.join(', ');
+			}
+			//Запускаем программы только после полной загрузки
+			window.onload = () =>  {
+
+				//Массив выигрышных комбинаций
+				let win = [73, 146, 292, 448, 56, 7, 84, 273];
+				//Ячейки с игрой
+				let td = document.querySelectorAll('.tic-toe td');
+				
+				//Функция проверки победы
+				const winFunction = set => {
+					//Только подмножества длиной 3 нам нужны
+					//Остальные игнорим
+					if (set.length === 3) {
+						//Если сумма кортежа равна одной из
+						//выйигрышных комбинаций, то мы выиграли
+						if (win.indexOf(arraySum(set)) > -1) {
+							return true;
+						}
+					}
+					//В противной случае игра продолжается
+					return false;
+				}
+				
+				//При клике на кнопку Начать игру, удаляем информацию о 
+				//прошлой игре и программируем условие игры заново
+				startGame.onclick = () => {
+					let step = 0; //Количество шагов в игре
+					let x = []; //Массив ходов крестиков
+					let o = []; //Массив ходов ноликов
+					let subsetArrayX = []; //Массив подмножеств из ходов крестиков
+					let subsetArrayO = []; //Массив подмножеств из ходов ноликов
+					let isWinX = false; //Переменная выигрыша крестиков
+					let isWinO = false; //Переменная выигрыша ноликов
+					
+					//Очищаем информацию о выигрыше
+					winOut.innerHTML = '';
+					
+					//Очищаем таблицу для новой игры
+					td.forEach(element => {
+						element.innerHTML = '';
+					});
+
+					//Обходим в цикле все игровые ячейки
+					td.forEach( (clickTd, i) => {
+						//Навешиваем на каждую ячейку условия игры при клике на ней
+						td[i].onclick = element => {
+								//Игра идёт до тех пор, пока не появится победная комбинация
+								if (!isWinO && !isWinX) {
+									//Нечетные ходы делают крестики
+									if (step % 2 === 0) {
+										//Добавляем значение ячейки в массив ходов
+										x.push(+(element.target.attributes[0].nodeValue));
+										//Рисуем крестик
+										element.target.innerHTML = 'X';
+									//Четные ходы делают нолики
+									} else {
+										//Добавляем значение ячейки в массив ходов
+										o.push(+(element.target.attributes[0].nodeValue));
+										//Рисуем нолики
+										element.target.innerHTML = '0';
+									}
+									//Выиграть можно только минимум на 5 ходе игры
+									if (step > 3) {
+										//На нечетном ходе проверяем победу крестиков
+										if (step % 2 === 0) {
+											//Получаем список подмножеств среди ходов крестиков
+											subsetArrayX = subSet(x);
+											//Если появилась выйгрышная комбинация, то крестики выиграли
+											isWinX = subsetArrayX.some(winFunction);
+
+										//На четном ходе проверяем победу ноликов
+										} else {
+											//Получаем список подмножеств среди ходов ноликов
+											subsetArrayO = subSet(o);
+											//Если появилась выйгрышная комбинация, то нолики выиграли
+											isWinO = subsetArrayO.some(winFunction); 
+										}
+									}
+									//Выводим кто победил, если хотя бы одна комбинация сработала
+									if (isWinO) {
+										winOut.innerHTML = 'Победили нолики';
+										return;
+									}
+									if (isWinX) {
+										winOut.innerHTML = 'Победили крестики';
+										return;
+									}
+									//Увеличиваем количество шагов на 1
+									step++;
+									//Удаляем события на ячейке, чтобы нельзя 
+									td[i].onclick = null;
+								}
+						}
+					})
+				}
+
+				//Событие на изменение инпута суммы арифметической прогрессии
+				arithProgress.onkeyup = val => {
+					arithProgressOut.innerHTML = arithProgressFunc(val.target.value);
+				};
+
+				//Событие на изменение инпута суммы геомметрической прогрессии
+				geomProgressSum.onkeyup = val => {
+					geomProgressSumOut.innerHTML = geomProgressSumFunc(val.target.value);
+				}
+
+				//Событие на изменение инпута произведения геомметрической прогрессии
+				geomProgressMult.onkeyup = val => {
+					geomProgressMultOut.innerHTML = geomProgressMultFunc(val.target.value);
+				}
+
+				//Событие на изменение инпута чисел Фибоначчи
+				fibonacci.onkeyup = val => {
+					fibonacciOut.innerHTML = fibonacciFunc(val.target.value);
+				}
+
+				//Количество бит, необходимых для покрытия всех символов
+				let base = 16;
+				//Генерируем сверхвозрастающую последовательность, длинной в 16, т.к. чтобы покрыть все символы надо 16 бит
+				let ww = superIncreasingSequence( base );
+				w.innerHTML = ww;
+				//Считаем сумму элементов сверхвозрастающей последовательности
+				let summa = totalSum( ww );
+				//Находим ближайшее большее простое число к sumw
+				let qq = nextPrime( summa );
+				q.innerHTML = qq;
+				//Находим ближайшее меньшее простое число к q
+				let rr = previousPrime( qq );
+				r.innerHTML = rr;
+				//Генерируем открытый ключ
+				let beta = mod( ww, rr, qq );
+
+				encode.onkeyup = () => {
+					//Переводим символы в коды
+					let textChar = toCharacterCode(encode.value);
+					//Переводим все наши символы в бинарный вид с ведущими нулями
+					let a = integerDigit( textChar, 2, base );
+					//Получаем массив зашифрованных чисел
+					let chifr = textEncode( a, beta );
+					//Делим наши числа двойками, по следующему правилу 512*a+b
+					let ds = codeToCouple( chifr );
+					//Переводим нашу последовательность в строку
+					let encodeString = fromCharacterCode( ds, 255 ); 
+					resultEncode.innerHTML = encodeString;
+				}
+				decode.onkeyup = () => {
+					//Переводим строку в последовательность символов
+					let chifrSeq = toCharacterCode(  decode.value , -255 );
+					//Востанавливаем из двоек последовательность шифра
+					let shifr = coupleToCode( chifrSeq );
+					//Нахождение обратного числа по модулю
+					let s = reverse( r1.value, q1.value );
+					//Умножаем на мулььтипликативное число
+					let b = mod( shifr, s, q1.value );
+					//Создаем массив
+					let yd = generateArray( b.length );
+					//Заполняем его нулями
+						yd = fillZero( yd, base );
+					//Декодируем нашу матрицу
+					let decodeString = textDecode( yd, b, w1.value.split(','), base );
+					//Переводим двоичный код в десятичный
+					let resultDigit = fromDigit(decodeString);
+					//Переводим нашу последовательность в строку
+					let result = fromCharacterCode( resultDigit); 
+					resultDecode.innerHTML = result;
+				}
+			}
+		</script>
+	</body>
+</html>
